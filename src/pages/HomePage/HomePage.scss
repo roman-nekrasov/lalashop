@@ -1,0 +1,22 @@
+.content {
+  &__controlPanel {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__wrapper {
+    display: flex;
+  }
+
+  &__sidebar {
+    flex: 0 0 20%;
+  }
+
+  &__items {
+  }
+}
+
+.buttonsBox {
+  display: flex;
+  align-items: center;
+}

@@ -14,15 +14,3 @@
   font-size: 54px;
   font-style: italic;
 }
-
-.buttons {
-  height: 100%;
-
-  &__wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-  }
-}
