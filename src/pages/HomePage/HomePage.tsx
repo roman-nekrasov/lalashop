@@ -1,5 +1,7 @@
+import { AppLayout } from "components";
+
 const HomePage: React.FC = () => {
-  return <div>HomePage</div>;
+  return <AppLayout>{""}</AppLayout>;
 };
 
 export default HomePage;
