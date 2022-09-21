@@ -1,0 +1,29 @@
+.productCard {
+  font-family: "SourceSansPro";
+  font-weight: 400;
+  font-size: 18px;
+
+  &__img {
+    width: 100%;
+  }
+
+  &__info {
+    padding: 12px 0;
+  }
+
+  &__rowWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // &__name {
+  // }
+
+  &__addToFavButton {
+    width: 18px;
+    height: 18px;
+  }
+
+  // &__price {
+  // }
+}

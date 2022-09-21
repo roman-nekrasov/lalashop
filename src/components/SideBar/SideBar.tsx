@@ -21,12 +21,11 @@ const SideBar: React.FC<ISideBarProps> = ({
           </button>
         </div>
         {productCategories.map(({ name, key }) => (
-          <div className="sideBar__buttonBox">
+          <div className="sideBar__buttonBox" key={key}>
             <button
               className={`sideBar__button${
                 key === chosenCategory ? "_bold" : ""
               }`}
-              key={key}
               onClick={() => setChosenCategory(key)}
             >
               {name}
