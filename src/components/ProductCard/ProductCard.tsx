@@ -6,7 +6,7 @@ interface IProductCardProps {
 }
 
 const ProductCard: React.FC<IProductCardProps> = ({ item }) => {
-  const { id, name, price, image } = item;
+  const { name, price, image } = item;
   return (
     <div className="productCard">
       <div className="productCard__img">
