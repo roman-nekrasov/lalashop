@@ -1,0 +1,16 @@
+.sideBar {
+  &__buttonList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__button {
+    font-family: "SourceSansPro";
+    font-weight: 400;
+
+    &_bold {
+      font-weight: 600;
+    }
+  }
+}

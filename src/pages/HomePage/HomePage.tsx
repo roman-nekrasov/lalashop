@@ -1,10 +1,12 @@
 // import columnIcon from "assets/img/columnsIcon.svg";
 import { ReactComponent as ColumnsIcon } from "assets/img/columnsIcon.svg";
 import { ReactComponent as GridIcon } from "assets/img/gridIcon.svg";
-import { AppLayout } from "components";
+import { AppLayout, SideBar } from "components";
+import { useState } from "react";
 import "./HomePage.scss";
 
 const HomePage: React.FC = () => {
+  const [chosenCategory, setChosenCategory] = useState<string>("");
   return (
     <AppLayout>
       <div className="content">
@@ -19,7 +21,12 @@ const HomePage: React.FC = () => {
           </div>
         </div>
         <div className="content__wrapper">
-          <div className="content__sidebar"></div>
+          <div className="content__sidebar">
+            <SideBar
+              chosenCategory={chosenCategory}
+              setChosenCategory={setChosenCategory}
+            />
+          </div>
           <div className="content__items"></div>
         </div>
       </div>
