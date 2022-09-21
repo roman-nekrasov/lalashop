@@ -6,12 +6,12 @@ interface IAppLayoutProps {
 
 const AppLayout: React.FC<IAppLayoutProps> = ({ children }) => {
   return (
-    <div className="pageContainer">
-      <div className="container">
-        <Header />
-        {children}
-        <Footer />
+    <div className="root">
+      <Header />
+      <div className="pageContainer">
+        <div className="container">{children}</div>
       </div>
+      <Footer />
     </div>
   );
 };
