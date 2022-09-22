@@ -1,0 +1,16 @@
+.header {
+  height: 230px;
+}
+
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  font-family: "SourceSansPro";
+  font-size: 54px;
+  font-style: italic;
+}
