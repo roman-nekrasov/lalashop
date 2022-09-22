@@ -14,10 +14,13 @@
 
   &__items {
     display: flex;
+    flex: 0 0 80%;
+    flex-wrap: wrap;
   }
 }
 
 .buttonsBox {
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
 }
