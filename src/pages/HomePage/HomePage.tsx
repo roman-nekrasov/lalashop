@@ -12,10 +12,11 @@ import "./HomePage.scss";
 const HomePage: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const layout = urlParams.get("layout") || "grid";
+  const category = urlParams.get("category");
 
   const favourite = localStorage.getItem("favouriteItems");
 
-  const [chosenCategory, setChosenCategory] = useState<string>("");
+  const [chosenCategory, setChosenCategory] = useState<string>(category || "");
   const [favouriteItems, setFavouriteItems] = useState<Array<number>>(
     favourite ? JSON.parse(favourite) : []
   );
