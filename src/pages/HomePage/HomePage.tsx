@@ -13,7 +13,12 @@ const HomePage: React.FC = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const layout = urlParams.get("layout") || "grid";
 
+  const favourite = localStorage.getItem("favouriteItems");
+
   const [chosenCategory, setChosenCategory] = useState<string>("");
+  const [favouriteItems, setFavouriteItems] = useState<Array<number>>(
+    favourite ? JSON.parse(favourite) : []
+  );
   const [, setRerender] = useState({});
 
   const forceRerender = useCallback(() => {
@@ -22,14 +27,24 @@ const HomePage: React.FC = () => {
 
   const [items, isLoading, isError] = useData<Array<ProductItem>>(API_URL);
 
+  const toggleItemInFavouriteList = (id: number) => {
+    const newFavList = favouriteItems.includes(id)
+      ? favouriteItems.filter((item) => item !== id)
+      : [...favouriteItems, id];
+    setFavouriteItems(newFavList);
+    localStorage.setItem("favouriteItems", JSON.stringify(newFavList));
+  };
+
   const displayedItems = useMemo(
     () =>
       items
         ? chosenCategory
-          ? items.filter(({ category }) => category === chosenCategory)
+          ? chosenCategory === "favourite"
+            ? items.filter(({ id }) => favouriteItems.includes(id))
+            : items.filter(({ category }) => category === chosenCategory)
           : items
         : [],
-    [chosenCategory, items]
+    [chosenCategory, favouriteItems, items]
   );
 
   return (
@@ -62,6 +77,7 @@ const HomePage: React.FC = () => {
             <SideBar
               chosenCategory={chosenCategory}
               setChosenCategory={setChosenCategory}
+              isFavouriteItemsExist={!!favouriteItems.length}
             />
           </div>
           <div className="content__items">
@@ -71,7 +87,13 @@ const HomePage: React.FC = () => {
               <div>Something went wrong...</div>
             ) : (
               displayedItems.map((item) => (
-                <ProductCard key={item.id} item={item} layout={layout} />
+                <ProductCard
+                  key={item.id}
+                  item={item}
+                  layout={layout}
+                  favourite={favouriteItems.includes(item.id)}
+                  addToFavourite={toggleItemInFavouriteList}
+                />
               ))
             )}
           </div>

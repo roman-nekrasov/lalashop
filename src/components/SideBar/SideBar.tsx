@@ -4,11 +4,13 @@ import "./SideBar.scss";
 interface ISideBarProps {
   chosenCategory: string;
   setChosenCategory: React.Dispatch<React.SetStateAction<string>>;
+  isFavouriteItemsExist: boolean;
 }
 
 const SideBar: React.FC<ISideBarProps> = ({
   chosenCategory,
   setChosenCategory,
+  isFavouriteItemsExist,
 }) => {
   return (
     <div className="sideBar">
@@ -39,6 +41,21 @@ const SideBar: React.FC<ISideBarProps> = ({
             </button>
           </div>
         ))}
+        {isFavouriteItemsExist && (
+          <div>
+            <button
+              onClick={() => {
+                changeUrlParams("category", "favourite");
+                setChosenCategory("favourite");
+              }}
+              className={`sideBar__button${
+                chosenCategory === "favourite" ? "_bold" : ""
+              }`}
+            >
+              Обрані товари
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
