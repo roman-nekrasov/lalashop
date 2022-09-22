@@ -1,4 +1,5 @@
 import { productCategories } from "utyls/constants";
+import { changeUrlParams } from "utyls/helpers";
 import "./SideBar.scss";
 interface ISideBarProps {
   chosenCategory: string;
@@ -14,7 +15,10 @@ const SideBar: React.FC<ISideBarProps> = ({
       <div className="sideBar__buttonList">
         <div>
           <button
-            onClick={() => setChosenCategory("")}
+            onClick={() => {
+              changeUrlParams("category", "all");
+              setChosenCategory("");
+            }}
             className={`sideBar__button${chosenCategory ? "" : "_bold"}`}
           >
             Переглянути все
@@ -26,7 +30,10 @@ const SideBar: React.FC<ISideBarProps> = ({
               className={`sideBar__button${
                 key === chosenCategory ? "_bold" : ""
               }`}
-              onClick={() => setChosenCategory(key)}
+              onClick={() => {
+                setChosenCategory(key);
+                changeUrlParams("category", key);
+              }}
             >
               {name}
             </button>

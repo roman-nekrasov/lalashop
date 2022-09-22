@@ -3,8 +3,9 @@ import { ReactComponent as ColumnsIcon } from "assets/img/columnsIcon.svg";
 import { ReactComponent as GridIcon } from "assets/img/gridIcon.svg";
 import { AppLayout, ProductCard, SideBar } from "components";
 import { useData } from "hooks";
-import { useCallback, useState } from "react";
-import { changeLayout } from "utyls/helpers";
+import { useCallback, useMemo, useState } from "react";
+import { API_URL } from "utyls/constants";
+import { changeUrlParams } from "utyls/helpers";
 import { ProductItem } from "utyls/types";
 import "./HomePage.scss";
 
@@ -19,8 +20,18 @@ const HomePage: React.FC = () => {
     setRerender({});
   }, []);
 
-  const [data, isLoading, isError] = useData<Array<ProductItem>>("");
-  // API_URL
+  const [items, isLoading, isError] = useData<Array<ProductItem>>(API_URL);
+
+  const displayedItems = useMemo(
+    () =>
+      items
+        ? chosenCategory
+          ? items.filter(({ category }) => category === chosenCategory)
+          : items
+        : [],
+    [chosenCategory, items]
+  );
+
   return (
     <AppLayout>
       <div className="content">
@@ -28,7 +39,7 @@ const HomePage: React.FC = () => {
           <div className="buttonsBox">
             <button
               onClick={() => {
-                changeLayout("columns");
+                changeUrlParams("layout", "columns");
                 forceRerender();
               }}
             >
@@ -38,7 +49,7 @@ const HomePage: React.FC = () => {
             </button>
             <button
               onClick={() => {
-                changeLayout("grid");
+                changeUrlParams("layout", "grid");
                 forceRerender();
               }}
             >
@@ -59,8 +70,7 @@ const HomePage: React.FC = () => {
             ) : isError ? (
               <div>Something went wrong...</div>
             ) : (
-              data &&
-              data.map((item) => (
+              displayedItems.map((item) => (
                 <ProductCard key={item.id} item={item} layout={layout} />
               ))
             )}

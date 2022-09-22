@@ -1,3 +1,3 @@
-import { changeLayout } from "./changeLayout";
+import { changeUrlParams } from "./changeUrlParams";
 
-export { changeLayout };
+export { changeUrlParams };
